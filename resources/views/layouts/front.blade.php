@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/rewear-logo-1.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/rewear-logo-1.png">
 
     <!-- all css here -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -23,7 +23,9 @@
     <link rel="stylesheet" href="/assets/css/bundle.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
     @livewireStyles
 
@@ -33,20 +35,30 @@
 <body>
 
     <header>
-        <div class="header-top-wrapper-2 border-bottom-2">
+        <div class="header-top-wrapper-2 border-bottom-3"
+            style="background-color: #2B2B2B; color: white; height: 60px;
+            ">
             <div class="header-info-wrapper pl-200 pr-200">
-                <div class="header-contact-info">
-                    {{-- <ul>
-                        <li><i class="pe-7s-call"></i> +011 2231 4545</li>
-                        <li><i class="pe-7s-mail"></i> <a href="#">company@domail.info</a></li>
-                    </ul> --}}
-                </div>
+
+
+
+                <a class="navbar-brand" href="{{ url('/') }}" style="height: 40px; width: auto;">
+                    <img src="/assets/img/logo/rewear-logo-1.png" alt="Logo"
+                        style="height: 35px; width: auto; justify-content: center; padding: 1px; margin-top: ">
+
+                </a>
+
+
+
+
+
+
                 <div class="electronics-login-register">
                     <ul>
-                        <li><a href="#"><i class="pe-7s-users"></i>My Account</a></li>
-                        <li><a data-toggle="modal" data-target="#exampleCompare" href="#"><i
-                                    class="pe-7s-repeat"></i>Compare</a></li>
-                        {{-- <li><a href="wishlist.html"><i class="pe-7s-like"></i>Wishlist</a></li> --}}
+                        <li><a href="{{ route('profile.show') }}"><i class="pe-7s-users"></i>My Account</a></li>
+                        {{-- <li><a data-toggle="modal" data-target="#exampleCompare" href="#"><i
+                                    class="pe-7s-repeat"></i>Compare</a></li> --}}
+                        <li><a href="{{ route('wishlist.index') }}"><i class="pe-7s-like"></i>Wishlist</a></li>
 
                         @auth
                             <li>
@@ -85,14 +97,14 @@
                     </div>
                 </div>
                 <div class="trace-cart-wrapper">
-                    <div class="trace same-style">
+                    {{-- <div class="trace same-style">
                         <div class="same-style-icon">
                             <a href="#"><i class="pe-7s-plane"></i></a>
                         </div>
                         <div class="same-style-text">
                             <a href="#">Product <br>trace</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="categories-cart same-style">
                         <div class="same-style-icon">
                             <a href="{{ route('cart.index') }}"><i class="pe-7s-cart"></i></a>
@@ -300,7 +312,7 @@
         </div>
     </footer> --}}
     <!-- modal -->
-    <div class="modal fade" id="exampleCompare" tabindex="-1" role="dialog" aria-hidden="true">
+    {{-- <div class="modal fade" id="exampleCompare" tabindex="-1" role="dialog" aria-hidden="true">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span class="pe-7s-close" aria-hidden="true"></span>
         </button>
@@ -402,7 +414,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span class="pe-7s-close" aria-hidden="true"></span>
@@ -512,6 +524,8 @@
     <script src="/assets/js/owl.carousel.min.js"></script>
     <script src="/assets/js/plugins.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
     @livewireScripts
 </body>

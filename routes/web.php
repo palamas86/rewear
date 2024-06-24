@@ -1,4 +1,11 @@
 <?php
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\WishlistItemController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AuctionController;
+use App\Http\Controllers\BidController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +21,7 @@
 Route::redirect('/', '/home');
 
 Auth::routes();
+Route::post('/checkout/group', [CheckoutController::class, 'groupCheckout'])->name('checkout.group');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/contact', 'HomeController@contact')->name('contact');
@@ -31,7 +39,7 @@ Route::get('/cart/apply-coupon', 'CartController@applyCoupon')->name('cart.coupo
 
 Route::resource('orders', 'OrderController')->only('store')->middleware('auth');
 
-Route::resource('shops','ShopController')->middleware('auth');
+Route::resource('shops', 'ShopController')->middleware('auth');
 
 
 Route::get('paypal/checkout/{order}', 'PayPalController@getExpressCheckout')->name('paypal.checkout');
@@ -47,9 +55,38 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'seller', 'middleware' => 'auth', 'as' => 'seller.', 'namespace' => 'Seller'], function () {
 
-    Route::redirect('/','seller/orders');
+    Route::redirect('/', 'seller/orders');
 
-    Route::resource('/orders',  'OrderController');
+    Route::resource('/orders', 'OrderController');
 
-    Route::get('/orders/delivered/{suborder}',  'OrderController@markDelivered')->name('order.delivered');
+    Route::get('/orders/delivered/{suborder}', 'OrderController@markDelivered')->name('order.delivered');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
+
+    Route::post('/wishlist/items/{product}', [WishlistItemController::class, 'store'])->name('wishlist.items.store');
+    Route::delete('/wishlist/items/{wishlistItem}', [WishlistItemController::class, 'destroy'])->name('wishlist.items.destroy');
+});
+Route::post('/checkout/group', [CheckoutController::class, 'groupCheckout'])->name('checkout.group');
+// routes/web.php
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+});
+
+Route::put('/profile/update', 'ProfileController@update')->name('profile.update');
+Route::get('/auction', [AuctionController::class, 'index'])->name('auction.index');
+Route::get('/auction/{id}', [AuctionController::class, 'show'])->name('auction.show');
+
+Route::post('/bids', [BidController::class, 'store'])->name('bids.store');
+
+
+
+
+
+Route::get('/auction/{id}/checkout', [AuctionController::class, 'checkoutAuction'])->name('checkoutauction');
+
+Route::post('/auction/{id}/process-payment', [AuctionController::class, 'processPayment'])->name('auction.processPayment');
+
