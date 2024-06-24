@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Electronics - eCommerce HTML5 Template</title>
+    <title>Rewear</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/rewear-logo-1.png">
 
     <!-- all css here -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -36,10 +36,10 @@
         <div class="header-top-wrapper-2 border-bottom-2">
             <div class="header-info-wrapper pl-200 pr-200">
                 <div class="header-contact-info">
-                    <ul>
+                    {{-- <ul>
                         <li><i class="pe-7s-call"></i> +011 2231 4545</li>
                         <li><i class="pe-7s-mail"></i> <a href="#">company@domail.info</a></li>
-                    </ul>
+                    </ul> --}}
                 </div>
                 <div class="electronics-login-register">
                     <ul>
@@ -49,19 +49,18 @@
                         {{-- <li><a href="wishlist.html"><i class="pe-7s-like"></i>Wishlist</a></li> --}}
 
                         @auth
-                        <li>
+                            <li>
                                 <form action=" {{ url('/logout') }} " method="POST">
                                     @csrf
                                     <input type="submit" value="Logout" />
                                 </form>
-                        </li>
-                            @else
-
+                            </li>
+                        @else
                             <li>
-                                <a href="{{url('/login')}}">Login</a>
+                                <a href="{{ url('/login') }}">Login</a>
                             </li>
                             <li>
-                                <a href="{{url('/register')}}">Sign Up</a>
+                                <a href="{{ url('/register') }}">Sign Up</a>
                             </li>
                         @endauth
 
@@ -72,14 +71,14 @@
         <div class="header-bottom pt-40 pb-30 clearfix">
             <div class="header-bottom-wrapper pr-200 pl-200">
                 <div class="logo-3">
-                    <a href="{{route('home')}}">
-                        <img src="/assets/img/logo/logo-3.png" alt="">
+                    <a href="{{ route('home') }}">
+
                     </a>
                 </div>
                 <div class="categories-search-wrapper">
 
                     <div class="categories-wrapper">
-                        <form action="{{route('products.search')}}" method="GET">
+                        <form action="{{ route('products.search') }}" method="GET">
                             <input name="query" placeholder="Enter Your key word" type="text">
                             <button type="submit"> Search </button>
                         </form>
@@ -102,9 +101,9 @@
                             <a href="{{ route('cart.index') }}">My Cart <br>
 
                                 @auth
-                                {{Cart::session(auth()->id())->getContent()->count()}}
+                                    {{ Cart::session(auth()->id())->getContent()->count() }}
                                 @else
-                                0
+                                    0
                                 @endauth
 
                                 Item</a>
@@ -115,7 +114,7 @@
                     <div class="mobile-menu">
                         <nav id="mobile-menu-active">
                             <ul class="menu-overflow">
-                                <li><a href="{{url('/')}}">HOME</a>
+                                <li><a href="{{ url('/') }}">HOME</a>
 
                                 </li>
                                 <li><a href="#">BLOG</a>
@@ -132,17 +131,15 @@
     <!-- header end -->
 
 
-    @if(session('message'))
-
+    @if (session('message'))
         <div class="alert alert-success text-center" role="alert">
             <strong>{{ session('message') }}</strong>
         </div>
     @endif
 
-    @if(session('error'))
-
+    @if (session('error'))
         <div class="alert alert-danger text-center" role="alert">
-            <strong>{{session('error')}} </strong>
+            <strong>{{ session('error') }} </strong>
         </div>
     @endif
 
@@ -150,7 +147,7 @@
     @yield('content')
 
 
-
+    {{--
     <footer class="footer-area">
         <div class="footer-top-3 black-bg pt-75 pb-25">
             <div class="container">
@@ -165,7 +162,8 @@
                                     </div>
                                     <div class="footer-info-content2">
                                         <p>77 Seventh Streeth Banasree
-                                            <br>Road Rampura -2100 Dhaka</p>
+                                            <br>Road Rampura -2100 Dhaka
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="footer-address-electro">
@@ -174,7 +172,8 @@
                                     </div>
                                     <div class="footer-info-content2">
                                         <p>+11 (019) 2518 4203
-                                            <br>+11 (251) 2223 3353</p>
+                                            <br>+11 (251) 2223 3353
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="footer-address-electro">
@@ -183,7 +182,8 @@
                                     </div>
                                     <div class="footer-info-content2">
                                         <p><a href="#">domain@mail.com</a>
-                                            <br><a href="#">company@domain.info</a></p>
+                                            <br><a href="#">company@domain.info</a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -298,7 +298,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> --}}
     <!-- modal -->
     <div class="modal fade" id="exampleCompare" tabindex="-1" role="dialog" aria-hidden="true">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -478,7 +478,8 @@
                             </div>
                             <div class="quickview-plus-minus">
                                 <div class="cart-plus-minus">
-                                    <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                    <input type="text" value="02" name="qtybutton"
+                                        class="cart-plus-minus-box">
                                 </div>
                                 <div class="quickview-btn-cart">
                                     <a class="btn-hover-black" href="#">add to cart</a>
